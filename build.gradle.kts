@@ -12,6 +12,10 @@ repositories {
 
 sourceSets {
     val generator by creating
+
+    main {
+        compiledBy("runGenerator")
+    }
 }
 
 dependencies {
@@ -47,16 +51,13 @@ tasks {
         useJUnitPlatform()
     }
 
-    jar {
-        dependsOn("runGenerator")
-        from(layout.buildDirectory.file("/aaaa"))
-    }
-
     create<JavaExec>("runGenerator") {
         group = "run"
         classpath = sourceSets["generator"].runtimeClasspath
         mainClass = "lol.bai.intersection.generator.Generator"
+        args(sourceSets.main.get().java.classesDirectory.get().asFile.absolutePath)
 
-        args(layout.buildDirectory.file("/aaaa").get().asFile.absolutePath)
+        inputs.dir(file("src/generator"))
+        outputs.dir(sourceSets.main.get().java.classesDirectory)
     }
 }
