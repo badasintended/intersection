@@ -1,4 +1,4 @@
-# intersection
+# intersection [![jitpack](https://jitpack.io/v/lol.bai/intersection.svg)](https://jitpack.io/#lol.bai/intersection)
 Illegal intersection types for Java.
 
 ## How?
